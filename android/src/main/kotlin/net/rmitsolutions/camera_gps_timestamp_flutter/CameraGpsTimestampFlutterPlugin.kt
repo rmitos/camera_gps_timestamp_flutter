@@ -15,6 +15,8 @@ import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry
 import net.rmitsolutions.camera_gps_timestamp.CameraActivity
 import net.rmitsolutions.camera_gps_timestamp.CameraGpsConstants
+import java.io.ByteArrayOutputStream
+import java.io.File
 
 /** CameraGpsTimestampFlutterPlugin */
 class CameraGpsTimestampFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
@@ -74,11 +76,17 @@ class CameraGpsTimestampFlutterPlugin : FlutterPlugin, MethodCallHandler, Activi
                 result.error("", "No photo taken.", "")
                 return true
             }
-            val contentResolver = activity!!.applicationContext.contentResolver
+            File(uri.path!!).inputStream().use {
+                val imageBytes = it.readBytes()
+                result.success(imageBytes)
+            }
+
+            /*val contentResolver = activity!!.applicationContext.contentResolver
             contentResolver.openInputStream(uri).use {
                 val imageBytes = it?.readBytes()
                 result.success(imageBytes)
-            }
+            }*/
+
             return true
         }
         return false

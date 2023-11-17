@@ -7,7 +7,6 @@ buildscript {
         google()
         mavenCentral()
         maven { url 'https://jitpack.io' }
-        //mavenLocal()
     }
 
     dependencies {
@@ -21,7 +20,6 @@ allprojects {
         google()
         mavenCentral()
         maven { url 'https://jitpack.io' }
-        //mavenLocal()
     }
 }
 
@@ -50,5 +48,5 @@ android {
 }
 
 dependencies {
-    implementation 'com.github.rmitos:cameragpstimestamp:1.0.4'
+    implementation 'com.github.rmitos:cameragpstimestamp:1.0.6'
 }
