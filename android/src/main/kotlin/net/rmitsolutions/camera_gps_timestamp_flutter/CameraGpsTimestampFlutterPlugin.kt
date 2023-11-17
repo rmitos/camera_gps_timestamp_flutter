@@ -21,7 +21,7 @@ import java.io.File
 /** CameraGpsTimestampFlutterPlugin */
 class CameraGpsTimestampFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
     PluginRegistry.ActivityResultListener {
-    private val photoRequestCode = 200
+    private val photoRequestCode = 199
     private var activity: Activity? = null
     private lateinit var channel: MethodChannel
     private lateinit var result: Result

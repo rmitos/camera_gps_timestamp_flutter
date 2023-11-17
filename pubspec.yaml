@@ -1,6 +1,6 @@
 name: camera_gps_timestamp_flutter
 description: Flutter Camera GPS timestamp plugin for Android
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/rmitos/camera_gps_timestamp_flutter.git
 
 environment:
