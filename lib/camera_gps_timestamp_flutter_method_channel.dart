@@ -10,8 +10,8 @@ class MethodChannelCameraGpsTimestampFlutter extends CameraGpsTimestampFlutterPl
   final methodChannel = const MethodChannel('camera_gps_timestamp_flutter');
 
   @override
-  Future<Uint8List?> takePhoto() async {
-    final file = await methodChannel.invokeMethod<Uint8List?>('takePhoto');
+  Future<List<Object?>?> takePhoto() async {
+    final file = await methodChannel.invokeMethod<List<Object?>?>('takePhoto');
     return file;
   }
 }

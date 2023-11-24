@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -39,11 +41,13 @@ class _MyAppState extends State<MyApp> {
                 ElevatedButton(
                   child: const Text("Take Photo"),
                   onPressed: () async {
-                    final content =
+                    final list =
                     await _cameraGpsTimestampFlutterPlugin.takePhoto();
-                    if (content != null) {
+                    if (list != null) {
+                      final file = File(list[0].toString());
+                      final img = await file.readAsBytes();
                       setState(() {
-                        _image = content;
+                      _image = img;
                       });
                     }
                   },

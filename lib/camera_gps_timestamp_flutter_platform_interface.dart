@@ -25,7 +25,7 @@ abstract class CameraGpsTimestampFlutterPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<Uint8List?> takePhoto() {
+  Future<List<Object?>?> takePhoto() {
     throw UnimplementedError('takePhoto() has not been implemented.');
   }
 }

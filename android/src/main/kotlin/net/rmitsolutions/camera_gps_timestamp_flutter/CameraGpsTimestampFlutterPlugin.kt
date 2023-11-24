@@ -15,6 +15,7 @@ import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry
 import net.rmitsolutions.camera_gps_timestamp.CameraActivity
 import net.rmitsolutions.camera_gps_timestamp.CameraGpsConstants
+import net.rmitsolutions.camera_gps_timestamp.LocationModel
 import java.io.ByteArrayOutputStream
 import java.io.File
 
@@ -72,18 +73,22 @@ class CameraGpsTimestampFlutterPlugin : FlutterPlugin, MethodCallHandler, Activi
                 data!!.extras!!.getParcelable(CameraGpsConstants.filePathExtra, Uri::class.java)
             }
 
+            val location: LocationModel? = if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
+                data.extras!!.getParcelable<LocationModel>(CameraGpsConstants.locationExtra)
+            } else {
+                data.extras!!.getParcelable(CameraGpsConstants.locationExtra, LocationModel::class.java)
+            }
+
             if (uri == null) {
                 result.error("", "No photo taken.", "")
                 return true
             }
-            File(uri.path!!).inputStream().use {
-                val imageBytes = it.readBytes()
-                result.success(imageBytes)
-            }
 
-            /*val contentResolver = activity!!.applicationContext.contentResolver
-            contentResolver.openInputStream(uri).use {
-                val imageBytes = it?.readBytes()
+            val list = listOf(uri.path!!, "${location!!.latitude},${location.longitude}")
+            result.success(list)
+
+            /*File(uri.path!!).inputStream().use {
+                val imageBytes = it.readBytes()
                 result.success(imageBytes)
             }*/
 
